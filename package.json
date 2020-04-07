@@ -34,11 +34,13 @@
     "@typescript-eslint/parser": "^2.3.2",
     "coveralls": "^3.0.6",
     "eslint": "^6.5.1",
+    "fs-extra": "^9.0.0",
     "jest": "^24.9.0",
     "rollup": "^1.23.1",
+    "rollup-plugin-bundle-size": "^1.0.3",
     "rollup-plugin-strip-code": "^0.2.7",
+    "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-typescript": "^1.0.1",
-    "rollup-plugin-uglify": "^6.0.3",
     "rollup-watch": "^4.3.1",
     "snazzy": "^8.0.0",
     "standard": "^14.3.1",
@@ -78,12 +80,13 @@
     "jest": "jest",
     "test": "jest && npm run standard",
     "coverage": "jest --coverage && npm run standard",
-    "build": "rollup -c && cp $npm_package_main docs/html5sortable.js",
+    "build": "rollup -c && npm run copy",
     "release": "sh make-release.sh",
     "standard": "standard 'src/*.ts' '__tests__/*.ts' | snazzy",
     "travis": "npm run cover && npm run standard",
     "cover": "jest --colors --coverage --coverageReporters=text-lcov | coveralls",
     "postversion": "npm run release",
-    "tsc": "tsc ./src/*.ts --pretty --diagnostics --noEmit --watch"
+    "tsc": "tsc ./src/*.ts --pretty --diagnostics --noEmit --watch",
+    "copy": "node ./copy.js"
   }
 }

@@ -1,7 +1,8 @@
-import { uglify } from 'rollup-plugin-uglify'
+import { terser } from 'rollup-plugin-terser'
 import typescript from 'rollup-plugin-typescript'
 import strip from 'rollup-plugin-strip-code'
 import pkg from './package.json'
+import bundleSize from 'rollup-plugin-bundle-size';
 
 let dir = `${pkg.dest}/`
 let banner = `/*
@@ -15,7 +16,8 @@ let banner = `/*
 let plugins = [
   typescript({
     target: 'ES5'
-  })
+  }),
+  bundleSize()
 ]
 // strip test code if not in testing mode
 if (!process.env.test) {
@@ -37,7 +39,7 @@ export default [
       sourcemap: true,
       banner: banner
     },
-    plugins: [...plugins, uglify()]
+    plugins: [...plugins, terser()]
   },
   {
     input: pkg.file,

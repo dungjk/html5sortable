@@ -499,7 +499,7 @@
 		// buttons to add items and reload the list
 		// separately to showcase issue without reload
 		document.querySelector('.js-add-item-button').addEventListener('click', function(){
-			doc = new DOMParser().parseFromString(`<li class="p1 mb1 blue bg-white">new item</li>`, "text/html").body.firstChild;
+			doc = new DOMParser().parseFromString('<li class="p1 mb1 blue bg-white">new item</li>', "text/html").body.firstChild;
 			document.querySelector('.js-sortable-buttons').appendChild(doc);
 		});
 
