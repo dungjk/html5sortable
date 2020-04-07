@@ -1,3 +1,5 @@
+import { ObjectEntries } from "./utils"
+
 /* eslint-env browser */
 export const stores: Map<HTMLElement, Store> = new Map()
 /**
@@ -13,14 +15,14 @@ export class Store implements Store {
    * @method config
    * @param {object} config object of configurations
    */
-  set config (config: configuration) {
+  set config(config: configuration) {
     if (typeof config !== 'object') {
       throw new Error('You must provide a valid configuration object to the config setter.')
     }
     // combine config with default
     const mergedConfig = Object.assign({}, config)
     // add config to map
-    this._config = new Map(Object.entries(mergedConfig))
+    this._config = new Map(ObjectEntries(mergedConfig))
   }
   /**
    * get the configuration map of a class instance
@@ -28,7 +30,7 @@ export class Store implements Store {
    * @return {object}
    */
 
-  get config (): configuration {
+  get config(): configuration {
     // transform Map to object
     const config = {}
     this._config.forEach((value, key) => {
@@ -45,7 +47,7 @@ export class Store implements Store {
    * @param  value any value
    * @return void
    */
-  setConfig (key: string, value: any): void {
+  setConfig(key: string, value: any): void {
     if (!this._config.has(key)) {
       throw new Error(`Trying to set invalid configuration item: ${key}`)
     }
@@ -59,7 +61,7 @@ export class Store implements Store {
    * @param  key valid configuration key
    * @return any configuration value
    */
-  getConfig (key: string): any {
+  getConfig(key: string): any {
     if (!this._config.has(key)) {
       throw new Error(`Invalid configuration item requested: ${key}`)
     }
@@ -71,7 +73,7 @@ export class Store implements Store {
    * @method placeholder
    * @return {HTMLElement|null}
    */
-  get placeholder (): HTMLElement {
+  get placeholder(): HTMLElement {
     return this._placeholder
   }
 
@@ -81,7 +83,7 @@ export class Store implements Store {
    * @param {HTMLElement} placeholder
    * @return {void}
    */
-  set placeholder (placeholder: HTMLElement): void {
+  set placeholder(placeholder: HTMLElement): void {
     if (!(placeholder instanceof HTMLElement) && placeholder !== null) {
       throw new Error('A placeholder must be an html element or null.')
     }
@@ -95,7 +97,7 @@ export class Store implements Store {
    * @param {any} value
    * @return {void}
    */
-  setData (key: string, value: Function): void {
+  setData(key: string, value: Function): void {
     if (typeof key !== 'string') {
       throw new Error('The key must be a string.')
     }
@@ -108,7 +110,7 @@ export class Store implements Store {
    * @param {string} key an existing key
    * @return {any}
    */
-  getData (key: string): any {
+  getData(key: string): any {
     if (typeof key !== 'string') {
       throw new Error('The key must be a string.')
     }
@@ -121,7 +123,7 @@ export class Store implements Store {
    * @param {string} key an existing key
    * @return {boolean}
    */
-  deleteData (key: string): boolean {
+  deleteData(key: string): boolean {
     if (typeof key !== 'string') {
       throw new Error('The key must be a string.')
     }

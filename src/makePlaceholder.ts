@@ -1,4 +1,7 @@
 /* eslint-env browser */
+
+import { IsArrayContains } from "./utils"
+
 /**
  * create a placeholder element
  * @param {HTMLElement} sortableElement a single sortable
@@ -15,9 +18,9 @@ export default (sortableElement: HTMLElement, placeholder?: HTMLElement, placeho
   }
   // if no placeholder element is given
   if (placeholder === undefined) {
-    if (['UL', 'OL'].includes(sortableElement.tagName)) {
+    if (IsArrayContains(['UL', 'OL'], sortableElement.tagName)) {
       placeholder = document.createElement('li')
-    } else if (['TABLE', 'TBODY'].includes(sortableElement.tagName)) {
+    } else if (IsArrayContains(['TABLE', 'TBODY'], sortableElement.tagName)) {
       placeholder = document.createElement('tr')
       // set colspan to always all rows, otherwise the item can only be dropped in first column
       placeholder.innerHTML = '<td colspan="100"></td>'
